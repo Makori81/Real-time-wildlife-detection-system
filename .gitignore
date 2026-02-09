@@ -20,7 +20,9 @@ runs/
 training_logs/
 *.log
 logs/
-
+*.zip
+*.rar
+*.7z
 
 # ========================================
 # PYTHON CACHE - AUTO-GENERATED
