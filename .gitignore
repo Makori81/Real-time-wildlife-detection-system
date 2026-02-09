@@ -1,0 +1,80 @@
+# ========================================
+# VIRTUAL ENVIRONMENT - DO NOT PUSH
+# ========================================
+wildlife_env/
+venv/
+env/
+Lib/
+Include/
+Scripts/
+share/
+etc/
+pyvenv.cfg
+*.venv
+
+
+# ========================================
+# TRAINING ARTIFACTS - TOO LARGE TO PUSH
+# ========================================
+runs/
+training_logs/
+*.log
+logs/
+
+
+# ========================================
+# PYTHON CACHE - AUTO-GENERATED
+# ========================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.Python
+*.egg
+
+
+# ========================================
+# DATABASE FILES
+# ========================================
+*.db
+detections.db
+*.sqlite
+*.sqlite3
+
+
+# ========================================
+# IDE AND EDITOR FILES
+# ========================================
+.vscode/
+.idea/
+.sublime-text
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+
+# ========================================
+# OS FILES
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+desktop.ini
+
+
+# ========================================
+# TEMP AND BACKUP FILES
+# ========================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
