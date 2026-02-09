@@ -1,82 +1,89 @@
-# ========================================
-# VIRTUAL ENVIRONMENT - DO NOT PUSH
-# ========================================
-wildlife_env/
+# LARGE FILES - NEVER COMMIT THESE
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+*.tar.gz
+*.tgz
+
+# Dataset files
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
+
+# Model files
+models/weights/*
+!models/weights/.gitkeep
+*.pt
+*.pth
+*.h5
+*.pkl
+*.joblib
+*.onnx
+
+# Virtual environment
+.venv/
 venv/
 env/
-Lib/
-Include/
-Scripts/
-share/
-etc/
-pyvenv.cfg
-*.venv
+ENV/
+env.bak/
+venv.bak/
 
-
-# ========================================
-# TRAINING ARTIFACTS - TOO LARGE TO PUSH
-# ========================================
-runs/
-training_logs/
-*.log
-logs/
-*.zip
-*.rar
-*.7z
-
-# ========================================
-# PYTHON CACHE - AUTO-GENERATED
-# ========================================
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.egg-info/
-dist/
-build/
+*.py[cod]
+*$py.class
+*.so
 .Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
 *.egg
+MANIFEST
 
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# ========================================
-# DATABASE FILES
-# ========================================
-*.db
-detections.db
-*.sqlite
-*.sqlite3
-
-
-# ========================================
-# IDE AND EDITOR FILES
-# ========================================
+# IDE
 .vscode/
 .idea/
-.sublime-text
 *.swp
 *.swo
 *~
-.DS_Store
-Thumbs.db
 
-
-# ========================================
-# OS FILES
-# ========================================
+# OS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-desktop.ini
+Thumbs.db
 
+# Logs
+*.log
+logs/
 
-# ========================================
-# TEMP AND BACKUP FILES
-# ========================================
+# Temporary files
 *.tmp
 *.temp
-*.bak
-*.backup
-*.orig
+temp/
+tmp/
