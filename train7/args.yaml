@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: /content/drive/MyDrive/wildlife_detection/extended_train/weights/best.pt
+model: yolo11n.pt
 data: /content/dataset/data.yaml
 epochs: 100
 time: null
@@ -13,7 +13,7 @@ cache: false
 device: null
 workers: 8
 project: /content/drive/MyDrive/wildlife_detection
-name: train4
+name: train7
 exist_ok: false
 pretrained: true
 optimizer: auto
@@ -103,4 +103,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: botsort.yaml
-save_dir: /content/drive/MyDrive/wildlife_detection/train4
+save_dir: /content/drive/MyDrive/wildlife_detection/train7
