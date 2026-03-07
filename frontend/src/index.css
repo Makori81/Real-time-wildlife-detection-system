@@ -1,0 +1,468 @@
+:root {
+      --bg: #0a0c10;
+      --surface: #12151c;
+      --border: #1e2330;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --accent: #00ff88;       /* main green accent */
+      --lion: #22c55e;         /* green  - lion */
+      --hyena: #a855f7;        /* purple - hyena */
+      --buffalo: #ef4444;      /* red    - buffalo */
+      --warning: #f59e0b;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .brand h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    .status-dot.online { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────────────── */
+    main {
+      padding: 1.5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Top section: video + stats side by side */
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .top-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── VIDEO PANEL ─────────────────────────────────────────────────── */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .video-wrapper {
+      position: relative;
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+
+    /* ── VIDEO ELEMENT ────────────────────────────────────────────────
+       This <img> tag connects to the backend MJPEG stream.
+       The src points to the backend's video streaming endpoint.
+       When backend is running and camera started, this auto-updates.
+    ─────────────────────────────────────────────────────────────────── */
+    #videoFeed {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Overlay shown when camera is off */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.85);
+      gap: 1rem;
+    }
+    .video-overlay.hidden { display: none; }
+    .overlay-icon { font-size: 3rem; opacity: 0.3; }
+    .overlay-text { font-size: 0.85rem; color: var(--muted); }
+
+    .video-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────────────────────── */
+    .btn {
+      padding: 0.5rem 1.25rem;
+      border: none;
+      border-radius: 5px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-transform: uppercase;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0c10;
+    }
+    .btn-primary:hover { filter: brightness(1.15); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-danger {
+      background: transparent;
+      border: 1px solid var(--buffalo);
+      color: var(--buffalo);
+    }
+    .btn-danger:hover { background: var(--buffalo); color: white; }
+    .btn-danger:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--text); color: var(--text); }
+
+    .fps-badge {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .fps-badge span { color: var(--accent); }
+
+    /* ── STATS PANEL ─────────────────────────────────────────────────── */
+    .stats-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .stat-card-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Total detections big number */
+    .big-number {
+      font-family: var(--font-mono);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .big-number-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Species breakdown rows */
+    .species-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .species-row:last-child { border-bottom: none; }
+
+    .species-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .species-color-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .species-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .species-count {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Live detection indicators */
+    .live-detections {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-height: 60px;
+    }
+
+    .live-det-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid var(--muted);
+      animation: slideIn 0.2s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .live-det-item.lion   { border-left-color: var(--lion);   }
+    .live-det-item.hyena  { border-left-color: var(--hyena);  }
+    .live-det-item.buffalo{ border-left-color: var(--buffalo); }
+
+    .live-det-species { font-size: 0.78rem; font-weight: 700; text-transform: capitalize; }
+    .live-det-conf { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+    .no-detection {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    /* ── LOGS TABLE ──────────────────────────────────────────────────── */
+    .logs-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .logs-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .filter-select:focus { outline: none; border-color: var(--accent); }
+
+    .log-count {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      padding: 0.6rem 1.25rem;
+      text-align: left;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(30,35,48,0.6);
+      transition: background 0.1s;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    tbody td {
+      padding: 0.65rem 1.25rem;
+      font-size: 0.82rem;
+    }
+
+    .species-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+    .species-tag .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+
+    .conf-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
+    .conf-bar {
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      width: 60px;
+      overflow: hidden;
+    }
+    .conf-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+    .conf-text { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+    .time-text { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+    .alert-badge {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .alert-badge.sent { background: rgba(34,197,94,0.15); color: var(--lion); }
+    .alert-badge.no   { background: rgba(100,116,139,0.15); color: var(--muted); }
+
+    .action-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .action-btn:hover { border-color: var(--buffalo); color: var(--buffalo); }
+
+    /* ── UPLOAD AREA ─────────────────────────────────────────────────── */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      margin: 0 1.25rem 1rem;
+    }
+    .upload-area:hover { border-color: var(--accent); }
+    .upload-area p { font-size: 0.78rem; color: var(--muted); }
+    #fileInput { display: none; }
+
+    /* ── TOAST NOTIFICATION ──────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 999;
+      pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
